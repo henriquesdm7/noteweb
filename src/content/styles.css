@@ -1,0 +1,299 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.note {
+  --note-body: #fff7b1;
+  --note-header: #ffe86b;
+  --note-accent: #e0b400;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  min-height: 90px;
+  background: var(--note-body);
+  border: 1px solid color-mix(in srgb, var(--note-accent) 55%, transparent);
+  border-radius: 6px;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.12),
+    0 6px 18px rgb(0 0 0 / 0.16);
+  overflow: hidden;
+  resize: both;
+  color: #2b2b2b;
+  font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif;
+  text-align: left;
+  pointer-events: auto;
+  transition: box-shadow 0.15s ease;
+}
+
+.note:focus-within {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.14),
+    0 10px 28px rgb(0 0 0 / 0.22);
+}
+
+.note.dragging {
+  user-select: none;
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 0.16),
+    0 14px 34px rgb(0 0 0 / 0.26);
+  opacity: 0.95;
+}
+
+.note.flash {
+  animation: flash 0.9s ease 2;
+}
+
+@keyframes flash {
+  50% {
+    box-shadow:
+      0 0 0 4px var(--note-accent),
+      0 10px 28px rgb(0 0 0 / 0.22);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  height: 30px;
+  padding: 0 4px 0 8px;
+  background: var(--note-header);
+  cursor: grab;
+  touch-action: none;
+}
+
+.note.dragging .header {
+  cursor: grabbing;
+}
+
+.grip {
+  flex: 1;
+  align-self: stretch;
+}
+
+.btn {
+  all: unset;
+  display: grid;
+  place-items: center;
+  flex: none;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 4px;
+  border-radius: 4px;
+  color: #3a3a3a;
+  font: 600 15px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgb(0 0 0 / 0.08);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--note-accent);
+  outline-offset: -2px;
+}
+
+.btn.style-btn::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--note-accent);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.2);
+}
+
+.btn.delete.confirm {
+  background: #d93025;
+  color: #fff;
+  font-size: 12px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: none;
+  padding: 6px 8px 8px;
+  background: var(--note-header);
+  border-top: 1px solid rgb(0 0 0 / 0.06);
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.panel-label {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.choice {
+  all: unset;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.choice:focus-visible {
+  outline: 2px solid #2b2b2b;
+  outline-offset: 1px;
+}
+
+.swatch {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25);
+}
+
+.swatch[aria-pressed='true'] {
+  box-shadow: 0 0 0 2px #2b2b2b;
+}
+
+.icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  color: #3a3a3a;
+}
+
+.icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.icon:hover {
+  background: rgb(0 0 0 / 0.08);
+}
+
+.icon[aria-pressed='true'] {
+  background: rgb(255 255 255 / 0.75);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25);
+}
+
+.text {
+  all: unset;
+  flex: 1;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  padding: 8px 10px 12px;
+  overflow: auto;
+  color: inherit;
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  cursor: text;
+}
+
+.text::placeholder {
+  color: rgb(0 0 0 / 0.4);
+}
+
+/* Nota minimizada: vira uma bolinha no mesmo ponto da nota. */
+.bubble,
+.tip {
+  display: none;
+}
+
+.note.minimized {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 0;
+  min-height: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--note-header);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.18),
+    0 3px 8px rgb(0 0 0 / 0.2);
+  overflow: visible;
+  resize: none;
+}
+
+.note.minimized > .header,
+.note.minimized > .panel,
+.note.minimized > .text {
+  display: none;
+}
+
+.note.minimized > .bubble {
+  all: unset;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: #3a3a3a;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.note.minimized.dragging > .bubble {
+  cursor: grabbing;
+}
+
+.bubble svg {
+  width: 18px;
+  height: 18px;
+}
+
+.note.minimized > .bubble:focus-visible {
+  outline: 2px solid var(--note-accent);
+  outline-offset: 3px;
+}
+
+.note.minimized > .tip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  max-width: 260px;
+  padding: 4px 10px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.12),
+    0 4px 12px rgb(0 0 0 / 0.16);
+  color: #2b2b2b;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.note.minimized.tip-left > .tip {
+  right: calc(100% + 8px);
+  left: auto;
+}
+
+.note.minimized:not(.dragging):has(> .bubble:hover) > .tip,
+.note.minimized > .bubble:focus-visible + .tip {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note,
+  .note.flash {
+    transition: none;
+    animation: none;
+  }
+}

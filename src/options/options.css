@@ -1,0 +1,161 @@
+body {
+  background: var(--bg-soft);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.brand p {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--primary) 14%, var(--bg));
+}
+
+.status.error {
+  background: color-mix(in srgb, var(--danger) 16%, var(--bg));
+}
+
+.search {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.page {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-link {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primary);
+  font-weight: 600;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  text-decoration: underline;
+}
+
+.page-count {
+  flex: none;
+  font-size: 12px;
+}
+
+.page-delete {
+  flex: none;
+  min-height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.page-delete.confirm {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: #fff;
+}
+
+.page-notes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-notes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 10px 10px 14px;
+}
+
+.page-notes li + li {
+  border-top: 1px solid var(--border);
+}
+
+.page-notes .badge {
+  margin-top: 1px;
+}
+
+.note-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.note-preview {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.note-meta {
+  margin: 2px 0 0;
+  font-size: 12px;
+}

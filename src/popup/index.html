@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NoteWeb</title>
+  </head>
+  <body>
+    <main class="popup">
+      <header class="top">
+        <img src="/icons/icon-32.png" alt="" width="20" height="20" />
+        <h1>NoteWeb</h1>
+      </header>
+
+      <p id="page" class="page muted" hidden></p>
+
+      <section id="state-restricted" class="state" hidden>
+        <p class="empty">Notas não estão disponíveis nesta página.</p>
+      </section>
+
+      <section id="state-reload" class="state" hidden>
+        <p class="empty">Esta aba foi aberta antes do NoteWeb ser instalado. Recarregue a página para usar as notas.</p>
+        <button id="reload" class="btn primary" type="button">Recarregar página</button>
+      </section>
+
+      <section id="state-ready" class="state" hidden>
+        <button id="new-note" class="btn primary wide" type="button">+ Nova nota</button>
+        <p class="hint muted">Dica: clique com o botão direito na página ou use <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>.</p>
+        <h2 id="count">Notas nesta página</h2>
+        <ul id="notes" class="notes"></ul>
+        <p id="empty" class="empty" hidden>Nenhuma nota nesta página ainda.</p>
+      </section>
+
+      <footer class="bottom">
+        <button id="open-options" class="link" type="button">Todas as notas e backup →</button>
+      </footer>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
